@@ -15,6 +15,8 @@ AMBIGUOUS_THRESHOLD = 0.55  # In-between = ambiguous
 
 # Function to determine ambiguity
 def get_ambiguity(user_query, faq_question):
+    if '|' in faq_question:
+        return "Yes"
     embeddings = model.encode([user_query, faq_question], convert_to_tensor=True)
     similarity = util.cos_sim(embeddings[0], embeddings[1]).item()
 
